@@ -95,6 +95,7 @@ export default function ProductPurchase() {
     const registry = 'Покупные изделия';
     const entityLink = '/purchase/';
     const isHideMoreDetails = true;
+    const apiValidate = 'ValidateProducts';
 
     return (
         <ClippedDrawer
@@ -108,6 +109,7 @@ export default function ProductPurchase() {
             registry={registry}
             entityLink={entityLink}
             isHideMoreDetails={isHideMoreDetails}
+            apiValidate={apiValidate}
         >
         </ClippedDrawer>
     );

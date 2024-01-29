@@ -294,7 +294,7 @@ EnhancedTableToolbar.propTypes = {
 export default function EnhancedTable(props) {
 
     const { atrs, api, Modal, ModalEdit, registry, entityLink,
-        isHideMoreDetails, isHideDelete } =
+        isHideMoreDetails, isHideDelete, apiValidate } =
         props;
     const [data, setData] = React.useState([]);
 
@@ -434,6 +434,7 @@ export default function EnhancedTable(props) {
                     isOpenEdit={isOpenEdit}
                     setIsOpenEdit={setIsOpenEdit}
                     api={api}
+                    apiValidate={apiValidate}
                 />
                 <EnhancedTableToolbar
                     numSelected={selected.length}

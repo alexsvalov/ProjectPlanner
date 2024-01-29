@@ -116,6 +116,7 @@ export default function ProductDetail() {
     const api = 'ProductDetails'
     const registry = 'Детали'
     const isHideMoreDetails = true;
+    const apiValidate = 'ValidateProducts';
 
     return (
         <ClippedDrawer
@@ -128,6 +129,7 @@ export default function ProductDetail() {
             ModalEdit={FormDialogProductDetailEdit}
             registry={registry}
             isHideMoreDetails={isHideMoreDetails}
+            apiValidate={apiValidate}
         >
         </ClippedDrawer>
     );

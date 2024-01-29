@@ -38,6 +38,7 @@ export default function MaterialTypeDict() {
     const api = 'MaterialTypeDicts'
     const registry = 'Тип материала'
     const isHideMoreDetails = true;
+    const apiValidate = 'ValidateMaterialTypeDicts';
 
     return (
         <ClippedDrawer
@@ -50,6 +51,7 @@ export default function MaterialTypeDict() {
             api={api}
             registry={registry}
             isHideMoreDetails={isHideMoreDetails}
+            apiValidate={apiValidate}
         >
         </ClippedDrawer>
     );

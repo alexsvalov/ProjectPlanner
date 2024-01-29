@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useForm, Controller } from 'react-hook-form'
 
 export default function FormDialogCustomerEdit(props) {
-    const { handleGetData, rowId, isOpenEdit, setIsOpenEdit, api } =
+    const { handleGetData, rowId, isOpenEdit, setIsOpenEdit, api, apiValidate } =
         props;
 
     const {
@@ -134,7 +134,7 @@ export default function FormDialogCustomerEdit(props) {
                             },
                             validate: {
                                 checkName: async (value) => {
-                                    const response = await fetch(`/api/` + api, {
+                                    const response = await fetch(`/api/` + apiValidate + `/` + rowId.id, {
                                         method: "get",
                                         headers: {
                                             'Content-Type': 'application/json'

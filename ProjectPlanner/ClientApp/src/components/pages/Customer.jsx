@@ -60,6 +60,7 @@ export default function Customer() {
     const api = 'Customers';
     const registry = 'Заказчики';
     const isHideMoreDetails = true;
+    const apiValidate = 'ValidateCustomers';
 
     return (
         <ClippedDrawer
@@ -72,6 +73,7 @@ export default function Customer() {
             ModalEdit={FormDialogCustomerEdit}
             registry={registry}
             isHideMoreDetails={isHideMoreDetails}
+            apiValidate={apiValidate}
         >
         </ClippedDrawer>
     );

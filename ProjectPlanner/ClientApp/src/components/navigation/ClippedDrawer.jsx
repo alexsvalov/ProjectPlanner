@@ -35,7 +35,8 @@ export default function ClippedDrawer(props) {
 
         isAddCompose, isLinkCompose, isSaveCompose,
         isProductAdd, isOrderProductAdd, isPlanProductAdd,
-        isHideQuantityInput, isSaveQuantityProduct, sheetColumns, isHideDelete, exportName } =
+        isHideQuantityInput, isSaveQuantityProduct, sheetColumns, isHideDelete, exportName,
+        apiValidate } =
         props;
 
     const [open, setOpen] = React.useState(true);
@@ -138,6 +139,7 @@ export default function ClippedDrawer(props) {
                 isHideDelete={isHideDelete}
                 sheetColumns={sheetColumns}
                 exportName={exportName}
+                apiValidate={apiValidate}
             >
             </Content>
         </Box>

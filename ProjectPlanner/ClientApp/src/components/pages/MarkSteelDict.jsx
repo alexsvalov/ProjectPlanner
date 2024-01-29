@@ -38,6 +38,7 @@ export default function MarkSteelDict() {
     const api = 'MarkSteelDicts'
     const registry = 'Марка стали'
     const isHideMoreDetails = true;
+    const apiValidate = 'ValidateMarkSteelDicts';
 
     return (
         <ClippedDrawer
@@ -50,6 +51,7 @@ export default function MarkSteelDict() {
             ModalEdit={FormDialogDictEdit}
             registry={registry}
             isHideMoreDetails={isHideMoreDetails}
+            apiValidate={apiValidate}
         >
         </ClippedDrawer>
     );

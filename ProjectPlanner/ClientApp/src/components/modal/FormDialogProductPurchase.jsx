@@ -148,6 +148,18 @@ export default function FormDialogProductPurchase(props) {
                         rules={{
                             required: "Поле обязательно к заполнению",
                             validate: {
+                                checkCodeStr: async (value) => {
+                                    const response = await fetch(`/api/` + api, {
+                                        method: "get",
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                    });
+                                    const result = await response.json();
+                                    let check = result.find(x =>
+                                        x.codeStr.trim().toLowerCase() === value.toLowerCase().trim());
+                                    return check === null || check === undefined || "Такое обозначение уже есть";
+                                },
                                 checkEmpty: (value) => {
                                     return value.trim() !== '' || "Поле обязательно к заполнению";
                                 }

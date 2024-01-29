@@ -10,7 +10,7 @@ import { useForm, Controller } from 'react-hook-form'
 
 
 export default function FormDialogProductComposeEdit(props) {
-    const { handleGetData, rowId, isOpenEdit, setIsOpenEdit, api } =
+    const { handleGetData, rowId, isOpenEdit, setIsOpenEdit, api, apiValidate } =
         props;
 
     const {
@@ -259,6 +259,17 @@ export default function FormDialogProductComposeEdit(props) {
                         rules={{
                             required: "Поле обязательно к заполнению",
                             validate: {
+                                checkCodeStr: async (value) => {
+                                    const response = await fetch(`/api/` + apiValidate + `/` + rowId.id, {
+                                        method: "get",
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                    });
+                                    const result = await response.json();
+                                    let check = result.find(x => x.codeStr.trim().toLowerCase() === value.toLowerCase().trim());
+                                    return check === null || check === undefined || "Такое обозначение уже есть";
+                                },
                                 checkEmpty: (value) => {
                                     return value.trim() !== '' || "Поле обязательно к заполнению";
                                 }

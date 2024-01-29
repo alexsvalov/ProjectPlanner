@@ -82,6 +82,7 @@ export default function ProductCompose() {
     const api = 'Products'
     const registry = 'Составные изделия'
     const entityLink = '/product/'
+    const apiValidate = 'ValidateProducts';
 
     return (
         <ClippedDrawer
@@ -94,6 +95,7 @@ export default function ProductCompose() {
             api={api}
             registry={registry}
             entityLink={entityLink}
+            apiValidate={apiValidate}
         >
         </ClippedDrawer>
     );

@@ -4,7 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 
 export default function ContentRegistry(props) {
     const { headCells, atrs, api, Modal, ModalEdit, registry, entityLink,
-        EnhancedTable, isHideMoreDetails, isHideDelete } = props;
+        EnhancedTable, isHideMoreDetails, isHideDelete, apiValidate } = props;
 
     return (
         <Box component="main" sx={{ flexGrow: 1, p: 0 }}>
@@ -20,6 +20,7 @@ export default function ContentRegistry(props) {
                 entityLink={entityLink}
                 isHideMoreDetails={isHideMoreDetails}
                 isHideDelete={isHideDelete}
+                apiValidate={apiValidate}
             >
             </EnhancedTable>
         </Box>

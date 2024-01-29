@@ -38,6 +38,7 @@ export default function ProductGroupDict() {
     const api = 'ProductGroupDicts'
     const registry = 'Группа изделий'
     const isHideMoreDetails = true;
+    const apiValidate = 'ValidateProductGroupDicts';
 
     return (
         <ClippedDrawer
@@ -50,6 +51,7 @@ export default function ProductGroupDict() {
             api={api}
             registry={registry}
             isHideMoreDetails={isHideMoreDetails}
+            apiValidate={apiValidate}
         >
         </ClippedDrawer>
     );

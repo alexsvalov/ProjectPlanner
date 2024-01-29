@@ -38,6 +38,8 @@ export default function MaterialGroupDict() {
     const api = 'MaterialGroupDicts'
     const registry = 'Группа материалов'
     const isHideMoreDetails = true;
+    const apiValidate = 'ValidateMaterialGroupDicts';
+
 
     return (
         <ClippedDrawer
@@ -50,6 +52,7 @@ export default function MaterialGroupDict() {
             api={api}
             registry={registry}
             isHideMoreDetails={isHideMoreDetails}
+            apiValidate={apiValidate}
         >
         </ClippedDrawer>
     );

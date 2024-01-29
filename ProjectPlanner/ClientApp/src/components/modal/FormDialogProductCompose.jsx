@@ -128,7 +128,7 @@ export default function FormDialogProductCompose(props) {
         reset();
         handleGetTypes();
         handleGetKinds();
-        handleGetGroups();  
+        handleGetGroups();
         if (isOpen) {
             handleClickOpen();
         }
@@ -144,6 +144,18 @@ export default function FormDialogProductCompose(props) {
                         rules={{
                             required: "Поле обязательно к заполнению",
                             validate: {
+                                checkCodeStr: async (value) => {
+                                    const response = await fetch(`/api/` + api, {
+                                        method: "get",
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                    });
+                                    const result = await response.json();
+                                    let check = result.find(x =>
+                                        x.codeStr.trim().toLowerCase() === value.toLowerCase().trim());
+                                    return check === null || check === undefined || "Такое обозначение уже есть";
+                                },
                                 checkEmpty: (value) => {
                                     return value.trim() !== '' || "Поле обязательно к заполнению";
                                 }
@@ -294,7 +306,7 @@ export default function FormDialogProductCompose(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Закрыть</Button>
-                     <Button onClick={handleSubmit(handleAddProduct)}>Добавить</Button>
+                    <Button onClick={handleSubmit(handleAddProduct)}>Добавить</Button>
                 </DialogActions>
             </Dialog>
         </React.Fragment>

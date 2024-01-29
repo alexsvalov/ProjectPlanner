@@ -37,7 +37,15 @@ const context = [
 
     "/api/AddProductComposes",
     "/api/AddOrderComposes",
-    "/api/AddPlanComposes",    
+    "/api/AddPlanComposes",
+
+
+    "/api/ValidateMarkSteelDicts",
+    "/api/ValidateMaterialGroupDicts",
+    "/api/ValidateMaterialTypeDicts",
+    "/api/ValidateCustomers",
+    "/api/ValidateProductGroupDicts",
+    "/api/ValidateProducts",
 ];
 
 const onError = (err, req, resp, target) => {
