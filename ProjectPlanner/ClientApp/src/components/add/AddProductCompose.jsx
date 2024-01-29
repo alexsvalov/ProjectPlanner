@@ -39,6 +39,12 @@ export default function AddProductCompose() {
             label: 'Вид изделия',
         },
         {
+            id: 'isPurchaseStr',
+            numeric: false,
+            disablePadding: false,
+            label: 'Покупное изделие',
+        },
+        {
             id: 'groupName',
             numeric: false,
             disablePadding: false,
@@ -69,6 +75,11 @@ export default function AddProductCompose() {
         },
         {
             id: 5,
+            name: 'isPurchaseStr',
+            align: 'left'
+        },        
+        {
+            id: 6,
             name: 'groupName',
             align: 'left'
         },
@@ -89,6 +100,8 @@ export default function AddProductCompose() {
 
     const isHideQuantityInput = true;
 
+    const composeName = 'Добавить изделие в спецификацию составного изделия'
+
     return (
         <Box>
             <ClippedDrawer
@@ -108,6 +121,7 @@ export default function AddProductCompose() {
                 isOrderProductAdd={isOrderProductAdd}
                 isProductAdd={isProductAdd}
                 isHideQuantityInput={isHideQuantityInput}
+                composeName={composeName}
             >
             </ClippedDrawer>
         </Box>

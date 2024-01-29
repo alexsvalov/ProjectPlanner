@@ -11,24 +11,6 @@ import Paper from '@mui/material/Paper';
 export default function BasicTableOrderProductCost(props) {
 
     const { productId, dataCost } = props;
-    //const [dataCost, setDataCost] = React.useState([]);
-
-    //async function handleGetData(id) {
-    //    const response = await fetch(`/api/CostOrderProducts` + `/${id}`, {
-    //        method: "get",
-    //        headers: {
-    //            'Content-Type': 'application/json'
-    //        },
-    //    });
-    //    const result = await response.json();
-    //    console.log(result);
-    //    setDataCost(result);
-    //    console.log(dataCost);
-    //}
-
-    //React.useEffect(() => {
-    //    handleGetData(productId);
-    //}, [])
 
     return (
         <TableContainer component={Paper}>
@@ -77,5 +59,3 @@ export default function BasicTableOrderProductCost(props) {
         </TableContainer>
     );
 }
-
-

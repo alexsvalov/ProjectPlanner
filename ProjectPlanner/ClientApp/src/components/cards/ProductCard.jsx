@@ -56,6 +56,12 @@ export default function ProductCard() {
             label: 'Вид изделия',
         },
         {
+            id: 'componentIsPurchaseStr',
+            numeric: false,
+            disablePadding: false,
+            label: 'Покупное изделие',
+        },
+        {
             id: 'componentGroupName',
             numeric: false,
             disablePadding: false,
@@ -94,6 +100,11 @@ export default function ProductCard() {
         },
         {
             id: 5,
+            name: 'componentIsPurchaseStr',
+            align: 'left'
+        },
+        {
+            id: 6,
             name: 'componentGroupName',
             subname: 'name',
             align: 'left'
@@ -106,13 +117,9 @@ export default function ProductCard() {
     const composeName = 'Спецификация изделия'
     const api = 'ProductComposes'    
     const isCompose = true
-
-   /* const apiAddCompose = 'ProductComposes';*/
-
     const isAddCompose = false;
     const isLinkCompose = true;
     const isSaveCompose = false;
-
     const isSaveQuantityProduct = true;
 
     return (

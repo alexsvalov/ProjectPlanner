@@ -4,7 +4,8 @@ import Toolbar from '@mui/material/Toolbar';
 
 
 export default function ContentReport(props) {
-    const { headCells, atrs, api, registry, EnhancedTable, composeName, productId, sheetColumns } = props;
+    const { headCells, atrs, api, registry, EnhancedTable, composeName,
+        productId, sheetColumns, exportName } = props;
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -16,6 +17,7 @@ export default function ContentReport(props) {
                 registry={registry}
                 productId={productId}
                 sheetColumns={sheetColumns}
+                exportName={exportName}
             >
             </EnhancedTable>
         </Box>

@@ -13,25 +13,18 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { visuallyHidden } from '@mui/utils';
-
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
-import ZoomInIcon from '@mui/icons-material/ZoomIn';
-import { Link } from 'react-router-dom';
-
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import SearchOffIcon from '@mui/icons-material/SearchOff';
 import DownloadIcon from '@mui/icons-material/Download';
 
 const ExcelJS = require('exceljs');
-
 
 
 function descendingComparator(a, b, orderBy) {
@@ -77,17 +70,6 @@ function EnhancedTableHead(props) {
     return (
         <TableHead>
             <TableRow>
-                {/*<TableCell padding="checkbox">*/}
-                {/*    <Checkbox*/}
-                {/*        color="primary"*/}
-                {/*        indeterminate={numSelected > 0 && numSelected < rowCount}*/}
-                {/*        checked={rowCount > 0 && numSelected === rowCount}*/}
-                {/*        onChange={onSelectAllClick}*/}
-                {/*        inputProps={{*/}
-                {/*            'aria-label': 'select all desserts',*/}
-                {/*        }}*/}
-                {/*    />*/}
-                {/*</TableCell>*/}
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.id}
@@ -125,7 +107,7 @@ EnhancedTableHead.propTypes = {
 
 function EnhancedTableToolbar(props) {
     const { numSelected, selected, handleGetData, api, setSelected,
-        handleAdd, registry, data, sheetColumns } = props;
+        handleAdd, registry, data, setData, sheetColumns, exportName } = props;
 
     const handleDelete = (idList) => {
         idList.forEach((id) => {
@@ -157,7 +139,13 @@ function EnhancedTableToolbar(props) {
         const workbook = new ExcelJS.Workbook();
         const sheet = workbook.addWorksheet();
 
-        sheet.autoFilter = 'A1:G1';
+        if (sheetColumns.length === 10)
+            sheet.autoFilter = 'A1:J1';
+        if (sheetColumns.length === 8)
+            sheet.autoFilter = 'A1:H1';
+        if (sheetColumns.length === 6)
+            sheet.autoFilter = 'A1:F1';
+
         sheet.columns = sheetColumns;
         data?.map((item, index) => {
             sheet.addRow({
@@ -167,7 +155,7 @@ function EnhancedTableToolbar(props) {
                 typeName: item?.typeName,
                 kindName: item?.kindName,
                 groupName: item?.groupName,
-                purchaseStr: item?.purchaseStr,
+                isPurchaseStr: item?.isPurchaseStr,
                 quantity: item?.quantity,
 
                 materialName: item?.materialName,
@@ -178,6 +166,10 @@ function EnhancedTableToolbar(props) {
                 materialGroupName: item?.materialGroupName,
                 productDetailLenghtNum: item?.productDetailLenghtNum,
                 productDetailWidthNum: item?.productDetailWidthNum,
+
+                lenghtNum: item?.lenghtNum,
+                markSteelName: item?.markSteelName,
+                sizeStr: item?.sizeStr,
             })
         });
         workbook.xlsx.writeBuffer().then(function (data) {
@@ -187,10 +179,73 @@ function EnhancedTableToolbar(props) {
             const url = window.URL.createObjectURL(blob);
             const anchor = document.createElement("a");
             anchor.href = url;
-            anchor.download = "products.xlsx";
+            anchor.download = exportName + ".xlsx";
             anchor.click();
             window.URL.revokeObjectURL(url);
         })
+    }
+
+
+    const [dataFilter, setDataFilter] = React.useState('');
+    const [isHiddenSearch, setIsHiddenSearch] = React.useState(true);
+
+    const filterData = (i) => {
+        setDataFilter(i);
+        setIsHiddenSearch(false);
+        if (i == null || i === "") {
+            handleGetData();
+        } else {
+            setData(data.filter(d =>
+                (d.addressStr !== undefined && d.addressStr !== null ?
+                    d.addressStr.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.codeStr !== undefined && d.codeStr !== null ?
+                    d.codeStr.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.createDateStr !== undefined && d.createDateStr !== null ?
+                    d.createDateStr.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.customerName !== undefined && d.customerName !== null ?
+                    d.customerName.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.deliveryCostStr !== undefined && d.deliveryCostStr !== null ?
+                    d.deliveryCostStr.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.execDateStr !== undefined && d.execDateStr !== null ?
+                    d.execDateStr.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.groupName !== undefined && d.groupName !== null ?
+                    d.groupName.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.innStr !== undefined && d.innStr !== null ?
+                    d.innStr.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.isPurchaseStr !== undefined && d.isPurchaseStr !== null ?
+                    d.isPurchaseStr.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.kindName !== undefined && d.kindName !== null ?
+                    d.kindName.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.lenghtNum !== undefined && d.lenghtNum !== null ?
+                    d.lenghtNum.toString().toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.markSteel !== undefined && d.markSteel !== null ?
+                    d.markSteel.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.materialStr !== undefined && d.materialStr !== null ?
+                    d.materialStr.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.name !== undefined && d.name !== null ?
+                    d.name.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.orderNum !== undefined && d.orderNum !== null ?
+                    d.orderNum.toString().toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.priceStr !== undefined && d.priceStr !== null ?
+                    d.priceStr.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.sizeStr !== undefined && d.sizeStr !== null ?
+                    d.sizeStr.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.typeName !== undefined && d.typeName !== null ?
+                    d.typeName.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.versionNum !== undefined && d.versionNum !== null ?
+                    d.versionNum.toString().toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.widthNum !== undefined && d.widthNum !== null
+                    ? d.widthNum.toString().toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.weightStr !== undefined && d.weightStr !== null ?
+                    d.weightStr.toLowerCase().includes(i.toLowerCase()) : false)
+            ))
+        }
+    }
+
+    const clearFilter = () => {
+        setDataFilter('');
+        setIsHiddenSearch(true);
+        handleGetData();
     }
 
     return (
@@ -237,28 +292,16 @@ function EnhancedTableToolbar(props) {
                         justifyContent: 'flex-end',
                     }}
                 >
-                    {/*<Box*/}
-                    {/*    sx={{*/}
-                    {/*        mr: 1*/}
-                    {/*    }}>*/}
-                    {/*    <Tooltip title="Add">*/}
-                    {/*        <IconButton onClick={handleAdd}>*/}
-                    {/*            <AddIcon />*/}
-                    {/*        </IconButton>*/}
-                    {/*    </Tooltip>*/}
-                        {/*</Box>*/}
-
-                        <Box
-                            sx={{
-                                mr: 1
-                            }}>
-                            <Tooltip title="Экспорт в Excel">
-                                <IconButton onClick={exportExcelFile} >
-                                    <DownloadIcon />
-                                </IconButton>
-                            </Tooltip>
-                        </Box>
-
+                    <Box
+                        sx={{
+                            mr: 1
+                        }}>
+                        <Tooltip title="Экспорт в Excel">
+                            <IconButton onClick={exportExcelFile} >
+                                <DownloadIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </Box>
                     <Paper
                         component="form"
                         sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 200, height: 40 }}
@@ -266,9 +309,13 @@ function EnhancedTableToolbar(props) {
                         <InputBase
                             sx={{ ml: 1, flex: 1 }}
                             inputProps={{ 'aria-label': 'search google maps' }}
+                            value={dataFilter} onChange={(e) => filterData(e.target.value)}
                         />
-                        <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+                        <IconButton type="button" sx={{ p: '10px' }} aria-label="search" hidden={!isHiddenSearch}>
                             <SearchIcon />
+                        </IconButton>
+                        <IconButton type="button" sx={{ p: '10px' }} aria-label="search" hidden={isHiddenSearch} onClick={clearFilter}>
+                            <SearchOffIcon />
                         </IconButton>
                     </Paper>
                 </Box>
@@ -283,7 +330,7 @@ EnhancedTableToolbar.propTypes = {
 
 export default function EnhancedTableReport(props) {
 
-    const { atrs, api, productId, registry, entityLink, sheetColumns } =
+    const { atrs, api, productId, registry, entityLink, sheetColumns, exportName } =
         props;
     const [data, setData] = React.useState([]);
 
@@ -393,8 +440,10 @@ export default function EnhancedTableReport(props) {
                     api={api}
                     handleAdd={handleAdd}
                     registry={registry}
+                    setData={setData}
                     data={data}
                     sheetColumns={sheetColumns}
+                    exportName={exportName}
                 />
                 <TableContainer>
                     <Table
@@ -422,18 +471,6 @@ export default function EnhancedTableReport(props) {
                                         key={row.id}
                                         selected={isItemSelected}
                                         sx={{ cursor: 'pointer' }}>
-                                        {/*<TableCell*/}
-                                        {/*    padding="checkbox"*/}
-                                        {/*    sx={{ width: 20 }}>*/}
-                                        {/*    <Checkbox*/}
-                                        {/*        onClick={(event) => handleClick(event, row.id)}*/}
-                                        {/*        aria-checked={isItemSelected}*/}
-                                        {/*        color="primary"*/}
-                                        {/*        checked={isItemSelected}*/}
-                                        {/*        inputProps={{*/}
-                                        {/*            'aria-labelledby': labelId,*/}
-                                        {/*        }} />*/}
-                                        {/*</TableCell>*/}
                                         <TableCell
                                             align="right"
                                             sx={{ width: 20 }}
@@ -445,18 +482,11 @@ export default function EnhancedTableReport(props) {
                                                 key={atr.id}
                                                 align={atr.align}>
                                                 {row[atr.name] === null ? '' :
-                                                typeof row[atr.name] === 'object' ? row[atr.name][atr.subname] : row[atr.name]}
+                                                    typeof row[atr.name] === 'object' ? row[atr.name][atr.subname] : row[atr.name]}
                                             </TableCell>
                                         ))}
-                                        {/*<TableCell align="right">*/}
-                                        {/*    <Link to={entityLink + `${row.id}`} replace={true}>*/}
-                                        {/*        <IconButton*/}
-                                        {/*            aria-label="ZoomIn"*/}
-                                        {/*            hidden={false}>*/}
-                                        {/*            <ZoomInIcon />*/}
-                                        {/*        </IconButton>*/}
-                                        {/*    </Link>*/}
-                                        {/*</TableCell>*/}
+
+                                        <TableCell></TableCell>
                                     </TableRow>
                                 );
                             })}

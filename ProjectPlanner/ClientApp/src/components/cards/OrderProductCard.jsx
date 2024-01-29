@@ -34,31 +34,37 @@ export default function ProductCard() {
         {
             id: 'productCodeStr',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Обозначение',
         },
         {
             id: 'productName',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Наименование',
         },
         {
             id: 'productTypeName',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Тип изделия',
         },
         {
             id: 'productKindName',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Вид изделия',
+        },
+        {
+            id: 'productIsPurchaseStr',
+            numeric: false,
+            disablePadding: false,
+            label: 'Покупное изделие',
         },
         {
             id: 'productGroupName',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Группа изделия',
         },
         {
@@ -92,6 +98,11 @@ export default function ProductCard() {
         },
         {
             id: 5,
+            name: 'productIsPurchaseStr',
+            align: 'left'
+        },
+        {
+            id: 6,
             name: 'productGroupName',
             align: 'left'
         },

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ProjectPlanner.DTO;
 using ProjectPlanner.Model;
+using System.Globalization;
 
 namespace ProjectPlanner.Services
 {
@@ -40,10 +41,12 @@ namespace ProjectPlanner.Services
                     CodeStr = g.Key.CodeStr,
                     Name = g.Key.Name,
                     IsPurchase = g.Key.IsPurchase,
+                    IsPurchaseStr = g.Key.IsPurchase ? "Да" : "Нет",
                     TypeName = g.Key.TypeName,
                     KindName = g.Key.KindName,
                     GroupName = g.Key.GroupName,
-                    Quantity = g.Sum(x => x.oc.QuantityNum)
+                    Quantity = g.Sum(x => x.oc.QuantityNum),
+                    QuantityStr = g.Sum(x => x.oc.QuantityNum).ToString("N0", new CultureInfo("ru-RU")),
                 };
 
             return query?.ToList();
@@ -98,7 +101,9 @@ namespace ProjectPlanner.Services
                     KindName = pk.Name,
                     GroupName = pg.Name,
                     IsPurchase = p.IsPurchase,
-                    Quantity = r.Value
+                    IsPurchaseStr = p.IsPurchase ? "Да" : "Нет",
+                    Quantity = r.Value,
+                    QuantityStr = r.Value.ToString("N0", new CultureInfo("ru-RU")),
                 };
 
             return query?.ToList();
@@ -139,7 +144,8 @@ namespace ProjectPlanner.Services
                     MaterialGroupName = g.Key.GroupName,
                     ProductDetailLenghtNum = g.Key.ProductDetailLenghtNum,
                     ProductDetailWidthNum = g.Key.WidthNum,
-                    Quantity = g.Sum(x => x.d.Value)
+                    Quantity = g.Sum(x => x.d.Value),
+                    QuantityStr = g.Sum(x => x.d.Value).ToString("N0", new CultureInfo("ru-RU")),
                 };
             return query?.ToList();
         }
@@ -175,7 +181,8 @@ namespace ProjectPlanner.Services
                     TypeName = g.Key.TypeName,
                     MarkSteelName = g.Key.MarkSteelName,
                     GroupName = g.Key.GroupName,
-                    Quantity = g.Sum(x => x.d.Value * x.pd.WeightNum)
+                    Quantity = g.Sum(x => x.d.Value * x.pd.WeightNum),
+                    QuantityStr = g.Sum(x => x.d.Value * x.pd.WeightNum).ToString("N2", new CultureInfo("ru-RU")),
                 };
             return query?.ToList();
         } 

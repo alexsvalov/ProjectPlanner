@@ -17,6 +17,7 @@
         public string? ComponentKindName { get; set; }
         public string? ComponentGroupName { get; set; }
         public bool? ComponentIsPurchase { get; set; }
+        public string? ComponentIsPurchaseStr { get; set; }
         public int? QuantityNum { get; set; }
     }
 }

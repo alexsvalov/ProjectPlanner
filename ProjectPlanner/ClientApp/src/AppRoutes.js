@@ -48,7 +48,7 @@ const AppRoutes = [
 
     {
         index: true,
-        element: <Customer />
+        element: <OrderProduct />
     },
     {
         path: '/customer',

@@ -1,7 +1,6 @@
 ﻿import { useParams } from 'react-router-dom';
 import ClippedDrawer from "../navigation/ClippedDrawer";
 import EnhancedTableReport from "../data/EnhancedTableReport";
-import Box from '@mui/material/Box';
 import ContentReport from "../content/ContentReport";
 
 
@@ -17,46 +16,52 @@ export default function ReportPlanMaterials() {
             label: '#',
         },
         {
-            id: 'materialName',
+            id: 'name',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Наименование материала',
         },
         {
-            id: 'materialSizeStr',
+            id: 'sizeStr',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Размер материала',
         },
         {
-            id: 'materialLenghtNum',
+            id: 'lenghtNum',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Длина материала',
         },
         {
-            id: 'materialTypeName',
+            id: 'typeName',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Тип материала',
         },
         {
-            id: 'materialMarkSteelName',
+            id: 'markSteelName',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Марка стали',
         },
         {
-            id: 'materialGroupName',
+            id: 'groupName',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Группа материала',
         },
         {
-            id: 'quantity',
-            numeric: false,
+            id: 'quantityStr',
+            numeric: true,
             disablePadding: false,
-            label: 'Количество',
+            label: 'Масса материала, кг',
+        },
+        {
+            id: 'empty',
+            numeric: true,
+            disablePadding: false,
+            label: '',
         },
     ];
 
@@ -86,8 +91,8 @@ export default function ReportPlanMaterials() {
             align: 'left'
         },
         {
-            name: 'quantity',
-            align: 'left'
+            name: 'quantityStr',
+            align: 'right'
         },
     ];
 
@@ -97,38 +102,38 @@ export default function ReportPlanMaterials() {
             key: "index",
         },
         {
-            header: "Обозначение",
-            key: "codeStr",
-            width: 15,
+            header: "Наименование материала",
+            key: "name",
+            width: 20,
         },
         {
-            header: "Наименование",
-            key: "name",
-            width: 25,
+            header: "Размер материала",
+            key: "sizeStr",
+            width: 20,
         },
 
         {
-            header: "Тип изделия",
+            header: "Длина материала",
+            key: "lenghtNum",
+            width: 20,
+        },
+        {
+            header: "Тип материала",
             key: "typeName",
             width: 20,
         },
         {
-            header: "Вид изделия",
-            key: "kindName",
+            header: "Марка стали",
+            key: "markSteelName",
             width: 20,
         },
         {
-            header: "Группа изделия",
+            header: "Группа материала",
             key: "groupName",
             width: 20,
-        },
+        },        
         {
-            header: "Покупное изделие",
-            key: "purchaseStr",
-            width: 20,
-        },
-        {
-            header: "Количество",
+            header: "Масса материала, кг",
             key: "quantity",
             width: 15,
         },
@@ -136,19 +141,20 @@ export default function ReportPlanMaterials() {
 
     const api = 'ReportPlanMaterials'
     const composeName = 'Ведомость материалов'
+    const exportName = 'materials'
 
     return (
         <ClippedDrawer
             Content={ContentReport}
             EnhancedTable={EnhancedTableReport}
-
             atrs={atrs}
             headCells={headCells}
             sheetColumns={sheetColumns}
-
             api={api}
             registry={composeName}
-            productId={productId}>
+            productId={productId}
+            exportName={exportName}
+        >
         </ClippedDrawer>
     );
 }

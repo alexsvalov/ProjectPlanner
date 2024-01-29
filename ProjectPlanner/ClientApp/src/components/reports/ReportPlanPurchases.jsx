@@ -18,38 +18,38 @@ export default function ReportPlanPurchases() {
         {
             id: 'codeStr',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Обозначение',
         },
         {
             id: 'name',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Наименование',
         },
         {
-            id: 'typeId',
+            id: 'kindName',
             numeric: false,
-            disablePadding: true,
-            label: 'Тип изделия',
-        },
-        {
-            id: 'kindId',
-            numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Вид изделия',
         },
         {
-            id: 'groupId',
+            id: 'groupName',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Группа изделия',
         },
         {
-            id: 'quantity',
-            numeric: false,
+            id: 'quantityStr',
+            numeric: true,
             disablePadding: false,
-            label: 'Количество',
+            label: 'Количество, шт.',
+        },
+        {
+            id: 'empty',
+            numeric: true,
+            disablePadding: false,
+            label: '',
         },
     ];
 
@@ -63,10 +63,6 @@ export default function ReportPlanPurchases() {
             align: 'left'
         },
         {
-            name: 'typeName',
-            align: 'left'
-        },
-        {
             name: 'kindName',
             align: 'left'
         },
@@ -75,8 +71,8 @@ export default function ReportPlanPurchases() {
             align: 'left'
         },
         {
-            name: 'quantity',
-            align: 'left'
+            name: 'quantityStr',
+            align: 'right'
         },
     ];
 
@@ -95,12 +91,6 @@ export default function ReportPlanPurchases() {
             key: "name",
             width: 25,
         },
-
-        {
-            header: "Тип изделия",
-            key: "typeName",
-            width: 20,
-        },
         {
             header: "Вид изделия",
             key: "kindName",
@@ -112,12 +102,7 @@ export default function ReportPlanPurchases() {
             width: 20,
         },
         {
-            header: "Покупное изделие",
-            key: "purchaseStr",
-            width: 20,
-        },
-        {
-            header: "Количество",
+            header: "Количество, шт.",
             key: "quantity",
             width: 15,
         },
@@ -125,19 +110,20 @@ export default function ReportPlanPurchases() {
 
     const api = 'ReportPlanPurchases'
     const composeName = 'Ведомость покупных изделий'
+    const exportName = 'purchases'
 
     return (
         <ClippedDrawer
             Content={ContentReport}
             EnhancedTable={EnhancedTableReport}
-
             atrs={atrs}
             headCells={headCells}
             sheetColumns={sheetColumns}
-
             api={api}
             registry={composeName}
-            productId={productId}>
+            productId={productId}
+            exportName={exportName}
+        >
         </ClippedDrawer>
     );
 }

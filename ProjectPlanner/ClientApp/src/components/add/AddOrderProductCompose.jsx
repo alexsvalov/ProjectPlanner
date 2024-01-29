@@ -7,69 +7,6 @@ import ContentAdd from "../content/ContentAdd";
 
 export default function AddOrderProductCompose() {
     const { productId } = useParams();
-    //const headCells = [
-    //    {
-    //        id: 'index',
-    //        numeric: true,
-    //        disablePadding: false,
-    //        label: '#',
-    //    },
-    //    {
-    //        id: 'createDate',
-    //        numeric: false,
-    //        disablePadding: true,
-    //        label: 'Дата создания',
-    //    },
-    //    {
-    //        id: 'execDate',
-    //        numeric: false,
-    //        disablePadding: true,
-    //        label: 'Дата выполнения',
-    //    },
-    //    {
-    //        id: 'customerName',
-    //        numeric: false,
-    //        disablePadding: true,
-    //        label: 'Заказчик',
-    //    },
-    //    {
-    //        id: 'priceNum',
-    //        numeric: false,
-    //        disablePadding: true,
-    //        label: 'Цена заказа без НДС',
-    //    },
-    //    {
-    //        id: 'action',
-    //        numeric: false,
-    //        disablePadding: false,
-    //        label: 'Действие',
-    //    },
-    //];
-
-    //const atrs = [
-    //    {
-    //        id: 1,
-    //        name: 'createDateStr',
-    //        align: 'left'
-    //    },
-    //    {
-    //        id: 2,
-    //        name: 'execDateStr',
-    //        align: 'left'
-    //    },
-
-    //    {
-    //        id: 3,
-    //        name: 'customerName',
-    //        align: 'left'
-    //    },
-    //    {
-    //        id: 4,
-    //        name: 'priceNum',
-    //        align: 'left'
-    //    },
-    //];
-
 
     const headCells = [
         {
@@ -103,6 +40,12 @@ export default function AddOrderProductCompose() {
             label: 'Вид изделия',
         },
         {
+            id: 'isPurchaseStr',
+            numeric: false,
+            disablePadding: false,
+            label: 'Покупное изделие',
+        },
+        {
             id: 'groupName',
             numeric: false,
             disablePadding: false,
@@ -133,6 +76,11 @@ export default function AddOrderProductCompose() {
         },
         {
             id: 5,
+            name: 'isPurchaseStr',
+            align: 'left'
+        },
+        {
+            id: 6,
             name: 'groupName',
             align: 'left'
         },
@@ -152,6 +100,7 @@ export default function AddOrderProductCompose() {
     const isProductAdd = false;
 
     const isHideQuantityInput = true;
+    const composeName = 'Добавить изделие в спецификацию заказа'
 
     return (
         <Box>
@@ -174,6 +123,7 @@ export default function AddOrderProductCompose() {
                 isOrderProductAdd={isOrderProductAdd}
                 isProductAdd={isProductAdd}
                 isHideQuantityInput={isHideQuantityInput}
+                composeName={composeName}
             >
             </ClippedDrawer>
         </Box>

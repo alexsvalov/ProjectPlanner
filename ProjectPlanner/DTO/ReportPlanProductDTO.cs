@@ -11,6 +11,8 @@ namespace ProjectPlanner.DTO
         public string? KindName { get; set; }
         public string? GroupName { get; set; }
         public bool? IsPurchase { get; set; }
+        public string? IsPurchaseStr { get; set; }
         public int Quantity { get; set; }
+        public string? QuantityStr { get; set; }
     }
 }

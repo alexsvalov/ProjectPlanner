@@ -38,8 +38,6 @@ export default function ContentPlanCompose(props) {
                             composeName={composeName}
                             entityLink={entityLink}
                             addEntityLink={addEntityLink}
-
-
                             isAddCompose={isAddCompose}
                             isLinkCompose={isLinkCompose}
                             isSaveCompose={isSaveCompose}

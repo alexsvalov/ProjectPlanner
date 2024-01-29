@@ -18,56 +18,62 @@ export default function ReportPlanBlanks() {
         {
             id: 'materialName',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Наименование материала',
         },
         {
             id: 'materialSizeStr',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Размер материала',
         },
         {
             id: 'materialLenghtNum',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Длина материала',
         },
         {
             id: 'materialTypeName',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Тип материала',
         },
         {
             id: 'materialMarkSteelName',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Марка стали',
         },
         {
             id: 'materialGroupName',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Группа материала',
         },
         {
             id: 'productDetailLenghtNum',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Длина заготовки',
         },
         {
             id: 'productDetailWidthNum',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Ширина заготовки',
         },
         {
-            id: 'quantity',
-            numeric: false,
+            id: 'quantityStr',
+            numeric: true,
             disablePadding: false,
-            label: 'Количество',
+            label: 'Количество, шт.',
+        },
+        {
+            id: 'empty',
+            numeric: true,
+            disablePadding: false,
+            label: '',
         },
     ];
 
@@ -105,8 +111,8 @@ export default function ReportPlanBlanks() {
             align: 'left'
         },
         {
-            name: 'quantity',
-            align: 'left'
+            name: 'quantityStr',
+            align: 'right'
         },
     ];
 
@@ -125,7 +131,6 @@ export default function ReportPlanBlanks() {
             key: "materialSizeStr",
             width: 10,
         },
-
         {
             header: "Длина материала",
             key: "materialLenghtNum",
@@ -157,7 +162,7 @@ export default function ReportPlanBlanks() {
             width: 10,
         },
         {
-            header: "Количество",
+            header: "Количество, шт.",
             key: "quantity",
             width: 15,
         },
@@ -166,19 +171,20 @@ export default function ReportPlanBlanks() {
 
     const api = 'ReportPlanBlanks'
     const composeName = 'Ведомость заготовок'
+    const exportName = 'blanks'
 
     return (
         <ClippedDrawer
             Content={ContentReport}
             EnhancedTable={EnhancedTableReport}
-
             atrs={atrs}
             headCells={headCells}
             sheetColumns={sheetColumns}
-
             api={api}
             registry={composeName}
-            productId={productId}>
+            productId={productId}
+            exportName={exportName}
+        >            
         </ClippedDrawer>
     );
 }

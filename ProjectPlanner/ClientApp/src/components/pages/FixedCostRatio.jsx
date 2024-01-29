@@ -1,6 +1,7 @@
 ﻿import ClippedDrawer from "../navigation/ClippedDrawer";
 import EnhancedTable from "../data/EnhancedTable";
 import FormDialogFixedCostRatio from "../modal/FormDialogFixedCostRatio";
+import FormDialogFixedCostRatioEdit from "../modal/FormDialogFixedCostRatioEdit";
 import ContentRegistry from "../content/ContentRegistry";
 
 
@@ -60,19 +61,21 @@ export default function FixedCostRatio() {
     const registry = 'Коэффициент общих расходов'
     const entityLink = '/fixed-cost/'
     const isHideMoreDetails = true;
+    const isHideDelete = true;
 
     return (
         <ClippedDrawer
             Content={ContentRegistry}
             EnhancedTable={EnhancedTable}
             Modal={FormDialogFixedCostRatio}
-            ModalEdit={FormDialogFixedCostRatio}
+            ModalEdit={FormDialogFixedCostRatioEdit}
             headCells={headCells}
             atrs={atrs}
-            api={api}            
+            api={api}
             registry={registry}
             entityLink={entityLink}
             isHideMoreDetails={isHideMoreDetails}
+            isHideDelete={isHideDelete}
         >
         </ClippedDrawer>
     );

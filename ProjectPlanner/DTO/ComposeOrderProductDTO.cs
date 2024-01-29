@@ -17,6 +17,7 @@
         public string? ProductKindName { get; set; }
         public string? ProductGroupName { get; set; }
         public bool? ProductIsPurchase { get; set; }
+        public string? ProductIsPurchaseStr { get; set; }
         public int? QuantityNum { get; set; }
     }
 }

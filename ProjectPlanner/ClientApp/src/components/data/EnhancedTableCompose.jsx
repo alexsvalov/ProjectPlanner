@@ -39,8 +39,6 @@ import DialogContent from '@mui/material/DialogContent';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 
-
-
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
@@ -155,22 +153,52 @@ function EnhancedTableToolbar(props) {
             handleGetData(productId);
         } else {
             setData(data.filter(d =>
-                (d.addressStr !== undefined ? d.addressStr.toLowerCase().includes(i.toLowerCase()) : false) ||
-                (d.codeStr !== undefined ? d.codeStr.toLowerCase().includes(i.toLowerCase()) : false) ||
-                (d.createDateStr !== undefined ? d.createDateStr.toLowerCase().includes(i.toLowerCase()) : false) ||
-                (d.customerName !== undefined ? d.customerName.toLowerCase().includes(i.toLowerCase()) : false) ||
-                (d.execDateStr !== undefined ? d.execDateStr.toLowerCase().includes(i.toLowerCase()) : false) ||
-                (d.group !== undefined ? d.group.toLowerCase().includes(i.toLowerCase()) : false) ||
-                (d.groupName !== undefined ? d.groupName.toLowerCase().includes(i.toLowerCase()) : false) ||
-                (d.innStr !== undefined ? d.innStr.toLowerCase().includes(i.toLowerCase()) : false) ||
-                (d.kindName !== undefined ? d.kindName.toLowerCase().includes(i.toLowerCase()) : false) ||
-                (d.lenghtNum !== undefined ? d.lenghtNum.toLowerCase().includes(i.toLowerCase()) : false) ||
-                (d.markSteel !== undefined ? d.markSteel.toLowerCase().includes(i.toLowerCase()) : false) ||
-                (d.name !== undefined ? d.name.toLowerCase().includes(i.toLowerCase()) : false) ||
-                (d.sizeStr !== undefined ? d.sizeStr.toLowerCase().includes(i.toLowerCase()) : false) ||
-                (d.type !== undefined ? d.type.toLowerCase().includes(i.toLowerCase()) : false) ||
-                (d.typeName !== undefined ? d.typeName.toLowerCase().includes(i.toLowerCase()) : false) ||
-                (d.versionNum !== undefined ? d.versionNum.toLowerCase().includes(i.toLowerCase()) : false)
+                (d.createDateStr !== undefined && d.createDateStr !== null ?
+                    d.createDateStr.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.codeStr !== undefined && d.codeStr !== null ?
+                    d.codeStr.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.customerName !== undefined && d.customerName !== null ?
+                    d.customerName.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.execDateStr !== undefined && d.execDateStr !== null ?
+                    d.execDateStr.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.groupName !== undefined && d.groupName !== null ?
+                    d.groupName.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.isPurchaseStr !== undefined && d.isPurchaseStr !== null ?
+                    d.isPurchaseStr.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.componentCodeStr !== undefined && d.componentCodeStr !== null ?
+                    d.componentCodeStr.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.componentGroupName !== undefined && d.componentGroupName !== null ?
+                    d.componentGroupName.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.componentIsPurchaseStr !== undefined && d.componentIsPurchaseStr !== null ?
+                    d.componentIsPurchaseStr.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.componentKindName !== undefined && d.componentKindName !== null ?
+                    d.componentKindName.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.componentName !== undefined && d.componentName !== null ?
+                    d.componentName.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.componentTypeName !== undefined && d.componentTypeName !== null ?
+                    d.componentTypeName.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.kindName !== undefined && d.kindName !== null ?
+                    d.kindName.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.name !== undefined && d.name !== null ?
+                    d.name.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.orderNum !== undefined && d.orderNum !== null ?
+                    d.orderNum.toString().toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.priceStr !== undefined && d.priceStr !== null ?
+                    d.priceStr.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.productCodeStr !== undefined && d.productCodeStr !== null ?
+                    d.productCodeStr.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.productGroupName !== undefined && d.productGroupName !== null ?
+                    d.productGroupName.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.productIsPurchaseStr !== undefined && d.productIsPurchaseStr !== null ?
+                    d.productIsPurchaseStr.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.productKindName !== undefined && d.productKindName !== null ?
+                    d.productKindName.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.productName !== undefined && d.productName !== null ?
+                    d.productName.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.productTypeName !== undefined && d.productTypeName !== null ?
+                    d.productTypeName.toLowerCase().includes(i.toLowerCase()) : false) || 
+                (d.typeName !== undefined && d.typeName !== null ?
+                    d.typeName.toLowerCase().includes(i.toLowerCase()) : false)
             ))
         }
     }
@@ -355,7 +383,7 @@ function EnhancedTableToolbar(props) {
                 >
                     <DialogContent>
                         <Alert severity="error">Внимание! Найдена циклическая связь!</Alert>
-                        {arrayCycle.join("-----")} не может быть добавлено в спецификацию.
+                        {arrayCycle.join("-----")} - изделие не может быть добавлено в спецификацию
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleCloseDialog}>Закрыть</Button>
@@ -370,7 +398,7 @@ function EnhancedTableToolbar(props) {
                     variant="subtitle1"
                     component="div"
                 >
-                    {numSelected} selected
+                    {numSelected} выбран(ы)
                 </Typography>
             ) : (
                 <Typography
@@ -610,7 +638,7 @@ export default function EnhancedTableCompose(props) {
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [rowsPerPage, setRowsPerPage] = React.useState(15);
 
 
     const handleRequestSort = (event, property) => {
@@ -704,12 +732,12 @@ export default function EnhancedTableCompose(props) {
                     isAddCompose={isAddCompose}
                     isLinkCompose={isLinkCompose}
                     isSaveCompose={isSaveCompose}
-
                     isProductAdd={isProductAdd}
                     isOrderProductAdd={isOrderProductAdd}
                     isPlanProductAdd={isPlanProductAdd}
-
                     handleGetDataBasicTableProduct={handleGetDataBasicTableProduct}
+                    setData={setData}
+                    data={data}
                 />
                 <TableContainer>
                     <Table
@@ -775,7 +803,7 @@ export default function EnhancedTableCompose(props) {
                                                 type="number"
                                                 min="1"
                                             />
-                                        </TableCell>
+                                        </TableCell>                                        
                                     </TableRow>
                                 );
                             })}
@@ -792,7 +820,7 @@ export default function EnhancedTableCompose(props) {
                     </Table>
                 </TableContainer>
                 <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
+                    rowsPerPageOptions={[10, 15, 20, 25]}
                     component="div"
                     count={data.length}
                     rowsPerPage={rowsPerPage}

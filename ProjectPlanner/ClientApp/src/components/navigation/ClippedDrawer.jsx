@@ -35,7 +35,7 @@ export default function ClippedDrawer(props) {
 
         isAddCompose, isLinkCompose, isSaveCompose,
         isProductAdd, isOrderProductAdd, isPlanProductAdd,
-        isHideQuantityInput, isSaveQuantityProduct, sheetColumns } =
+        isHideQuantityInput, isSaveQuantityProduct, sheetColumns, isHideDelete, exportName } =
         props;
 
     const [open, setOpen] = React.useState(true);
@@ -67,7 +67,7 @@ export default function ClippedDrawer(props) {
                         {[['Планы производства', "/plan", < SchemaIcon />], ['Заказы', "/order", <SwitchAccountIcon />],
                           ['Составные изделия', "/product", <PolylineIcon />], ['Покупные изделия', "/purchase", <CandlestickChartIcon />],
                           ['Детали', "/detail", <ImageAspectRatioIcon />], ['Материалы', "/material", <LineWeightIcon />]].map((text, index) => (
-                              <Link href={text[1]} underline="none">
+                              <Link key={text[0]} href={text[1]} underline="none">
                                   <ListItem key={text[0]} disablePadding >
                                     <ListItemButton>
                                         <ListItemIcon>
@@ -92,8 +92,8 @@ export default function ClippedDrawer(props) {
                         <List>
                             {[['Заказчики', "/customer"], ['Группа изделий', "/product-group"], ['Группа материалов', "/material-group"],
                                 ['Тип материала', "/material-type"], ['Марка стали', "/mark-steel"], ['Общие расходы', "/fixed-cost"]].map((text, index) => (
-                                <Link href={text[1]} underline="none">
-                                        <ListItem key={text[0]} disablePadding>
+                                    <Link key={text[0]} href={text[1]} underline="none">
+                                        <ListItem key={text[0]} disablePadding >
                                         <ListItemButton>
                                             <ListItemIcon>
                                                 <ArchiveIcon />
@@ -115,10 +115,8 @@ export default function ClippedDrawer(props) {
                 Modal={Modal}
                 ModalEdit={ModalEdit}
                 registry={registry}
-
                 isCompose={isCompose}
                 BasicTable={BasicTable}
-
                 apiCost={apiCost}
                 product={product}
                 productId={productId}
@@ -129,7 +127,6 @@ export default function ClippedDrawer(props) {
                 addEntityLink={addEntityLink}
                 apiAddCompose={apiAddCompose}
                 isHideMoreDetails={isHideMoreDetails}
-
                 isAddCompose={isAddCompose}
                 isLinkCompose={isLinkCompose}
                 isSaveCompose={isSaveCompose}
@@ -138,7 +135,9 @@ export default function ClippedDrawer(props) {
                 isPlanProductAdd={isPlanProductAdd}
                 isHideQuantityInput={isHideQuantityInput}
                 isSaveQuantityProduct={isSaveQuantityProduct}
+                isHideDelete={isHideDelete}
                 sheetColumns={sheetColumns}
+                exportName={exportName}
             >
             </Content>
         </Box>

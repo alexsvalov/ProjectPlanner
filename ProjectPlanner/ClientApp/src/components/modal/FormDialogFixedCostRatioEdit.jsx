@@ -8,19 +8,22 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useForm, Controller } from 'react-hook-form'
 
 
-export default function FormDialogFixedCostRatio(props) {
-    const { handleGetData, isOpen, setIsOpen, api } =
+export default function FormDialogFixedCostRatioEdit(props) {
+    const { handleGetData, rowId, isOpenEdit, setIsOpenEdit, api } =
         props;
 
     const {
         handleSubmit,
         reset,
         control,
+        setValue,
         getValues
     } = useForm({
         mode: "onBlur",
         defaultValues: {
-            ratioNumAdd: '',
+            ratioNumEdit: '',
+            startDateEdit: '',
+            finishDateEdit: '',
         },
     });
 
@@ -32,41 +35,66 @@ export default function FormDialogFixedCostRatio(props) {
 
     const handleClose = () => {
         setOpen(false);
-        setIsOpen(false);
+        setIsOpenEdit(false);
     };
 
-    async function handleAdd() {
-        const response = await fetch(`/api/` + api, {
-            method: 'post',
+    async function handleEdit() {
+        const response = await fetch(`/api/` + api + '/' + rowId.id, {
+            method: "get",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                ratioNum: getValues("ratioNumAdd"),
-            })
         });
         const result = await response.json();
         console.log(result);
-        handleGetData();
-        handleClose();
+        setValue("ratioNumEdit", result.ratioNum);
+        setValue("startDateEdit", result.startDate);
+        setValue("finishDateEdit", result.finishDate);
         if (!response.ok) {
             const message = `An error has occured: ${response.status}`;
             console.log(message);
             throw new Error(message);
         }
-    };
+    }
+
+    const handleUpdate = () => {
+        fetch(`/api/` + api + '/' + rowId.id, {
+            method: "put",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: rowId.id,
+                ratioNum: getValues("ratioNumEdit"),
+                startDate: getValues("startDateEdit"),
+                finishDate: getValues("finishDateEdit"),
+            }),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Response not ok!");
+                }
+                handleGetData();
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+        handleClose();
+    }
 
     React.useEffect(() => {
         reset();
-        if (isOpen) {
+        handleGetData();
+        handleEdit();
+        if (isOpenEdit) {
             handleClickOpen();
         }
-    }, [isOpen])
+    }, [isOpenEdit])
 
     return (
         <React.Fragment>
             <Dialog fullWidth open={open} onClose={handleClose}>
-                <DialogTitle>Создание нового элемента</DialogTitle>
+                <DialogTitle>Редактирование элемента</DialogTitle>
                 <DialogContent>
                     <Controller
                         control={control}
@@ -84,7 +112,7 @@ export default function FormDialogFixedCostRatio(props) {
                                 helperText={error?.message}
                                 required
                                 margin="dense"
-                                id="ratioNumAddText"
+                                id="ratioNumEditText"
                                 label="Коэффициент постоянных затрат"
                                 type="number"
                                 fullWidth
@@ -93,12 +121,12 @@ export default function FormDialogFixedCostRatio(props) {
                                 onChange={(e) => onChange(e.target.value)}
                             />
                         )}
-                        name="ratioNumAdd"
+                        name="ratioNumEdit"
                     />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Закрыть</Button>
-                    <Button onClick={handleSubmit(handleAdd)}>Добавить</Button>
+                    <Button onClick={handleSubmit(handleUpdate)}>Изменить</Button>
                 </DialogActions>
             </Dialog>
         </React.Fragment>

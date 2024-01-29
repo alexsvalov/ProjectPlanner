@@ -13,5 +13,6 @@
         public int ProductDetailLenghtNum { get; set; }
         public int? ProductDetailWidthNum { get; set; }                       
         public int Quantity { get; set; }
+        public string? QuantityStr { get; set; }
     }
 }

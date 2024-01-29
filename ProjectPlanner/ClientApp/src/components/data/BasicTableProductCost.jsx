@@ -11,24 +11,6 @@ import Paper from '@mui/material/Paper';
 export default function BasicTableProductCost(props) {
 
     const { productId, dataCost } = props;
-    //const [dataCost, setDataCost] = React.useState([]);
-
-    //async function handleGetDataBasicTable(id) {
-    //    const response = await fetch(`/api/CostProducts` + `/${id}`, {
-    //        method: "get",
-    //        headers: {
-    //            'Content-Type': 'application/json'
-    //        },
-    //    });
-    //    const result = await response.json();
-    //    console.log(result);
-    //    setDataCost(result);
-    //    console.log(dataCost);
-    //}
-
-    //React.useEffect(() => {
-    //    handleGetDataBasicTable(productId);
-    //}, [])
 
     return (
         <TableContainer component={Paper}>            

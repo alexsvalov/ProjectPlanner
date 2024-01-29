@@ -1,7 +1,6 @@
 ﻿import { useParams } from 'react-router-dom';
 import ClippedDrawer from "../navigation/ClippedDrawer";
 import EnhancedTableReport from "../data/EnhancedTableReport";
-import Box from '@mui/material/Box';
 import ContentReport from "../content/ContentReport";
 
 
@@ -19,44 +18,50 @@ export default function ReportPlanProducts() {
         {
             id: 'codeStr',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Обозначение',
         },
         {
             id: 'name',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Наименование',
         },
         {
-            id: 'typeId',
+            id: 'typeName',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Тип изделия',
         },
         {
-            id: 'kindId',
+            id: 'kindName',
             numeric: false,
-            disablePadding: true,
+            disablePadding: false,
             label: 'Вид изделия',
         },
         {
-            id: 'groupId',
-            numeric: false,
-            disablePadding: true,
-            label: 'Группа изделия',
-        },
-        //{
-        //    id: 'isPurchase',
-        //    numeric: false,
-        //    disablePadding: true,
-        //    label: 'Покупное изделие',
-        //},
-        {
-            id: 'quantity',
+            id: 'groupName',
             numeric: false,
             disablePadding: false,
-            label: 'Количество',
+            label: 'Группа изделия',
+        },
+        {
+            id: 'isPurchaseStr',
+            numeric: false,
+            disablePadding: false,
+            label: 'Покупное изделие',
+        },
+        {
+            id: 'quantityStr',
+            numeric: true,
+            disablePadding: false,
+            label: 'Количество, шт.',
+        },
+        {
+            id: 'empty',
+            numeric: true,
+            disablePadding: false,
+            label: '',
         },
     ];
 
@@ -81,13 +86,13 @@ export default function ReportPlanProducts() {
             name: 'groupName',
             align: 'left'
         },
-        //{
-        //    name: 'isPurchase',
-        //    align: 'left'
-        //},
         {
-            name: 'quantity',
+            name: 'isPurchaseStr',
             align: 'left'
+        },
+        {
+            name: 'quantityStr',
+            align: 'right'
         },
     ];
 
@@ -126,11 +131,11 @@ export default function ReportPlanProducts() {
         },
         {
             header: "Покупное изделие",
-            key: "purchaseStr",
+            key: "isPurchaseStr",
             width: 20,
         },
         {
-            header: "Количество",
+            header: "Количество, шт.",
             key: "quantity",
             width: 15,
         },
@@ -138,19 +143,20 @@ export default function ReportPlanProducts() {
 
     const api = 'ReportPlanProducts'
     const composeName = 'План производства изделий'
+    const exportName = 'products'
 
     return (
         <ClippedDrawer
             Content={ContentReport}
             EnhancedTable={EnhancedTableReport}
-
             atrs={atrs}
             headCells={headCells}
             sheetColumns={sheetColumns}
-
             api={api}
             registry={composeName}
-            productId={productId}>
+            productId={productId}
+            exportName={exportName}
+        >
         </ClippedDrawer>
     );
 }

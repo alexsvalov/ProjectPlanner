@@ -10,5 +10,6 @@
         public string? MarkSteelName { get; set; }
         public string? GroupName { get; set; }
         public decimal Quantity { get; set; }
+        public string? QuantityStr { get; set; }
     }
 }

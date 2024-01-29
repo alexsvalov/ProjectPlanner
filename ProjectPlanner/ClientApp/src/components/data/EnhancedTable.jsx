@@ -65,7 +65,8 @@ function stableSort(array, comparator) {
 
 
 function EnhancedTableHead(props) {
-    const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells } =
+    const { onSelectAllClick, order, orderBy, numSelected, rowCount,
+        onRequestSort, headCells, isHideDelete } =
         props;
     const createSortHandler = (property) => (event) => {
         onRequestSort(event, property);
@@ -74,7 +75,10 @@ function EnhancedTableHead(props) {
     return (
         <TableHead>
             <TableRow>
-                <TableCell padding="checkbox">
+                <TableCell
+                    hidden={isHideDelete}
+                    padding="checkbox"
+                >
                     <Checkbox
                         color="primary"
                         indeterminate={numSelected > 0 && numSelected < rowCount}
@@ -145,12 +149,12 @@ function EnhancedTableToolbar(props) {
                     d.deliveryCostStr.toLowerCase().includes(i.toLowerCase()) : false) ||
                 (d.execDateStr !== undefined && d.execDateStr !== null ?
                     d.execDateStr.toLowerCase().includes(i.toLowerCase()) : false) ||
-                //(d.group.name !== undefined ? d.group.name.toLowerCase().includes(i.toLowerCase()) : false) ||
                 (d.groupName !== undefined && d.groupName !== null ?
                     d.groupName.toLowerCase().includes(i.toLowerCase()) : false) ||
                 (d.innStr !== undefined && d.innStr !== null ?
                     d.innStr.toLowerCase().includes(i.toLowerCase()) : false) ||
-                //(d.kind.name !== undefined ? d.kind.name.toLowerCase().includes(i.toLowerCase()) : false) ||
+                (d.isPurchaseStr !== undefined && d.isPurchaseStr !== null ?
+                    d.isPurchaseStr.toLowerCase().includes(i.toLowerCase()) : false) ||
                 (d.kindName !== undefined && d.kindName !== null ?
                     d.kindName.toLowerCase().includes(i.toLowerCase()) : false) ||
                 (d.lenghtNum !== undefined && d.lenghtNum !== null ?
@@ -167,7 +171,6 @@ function EnhancedTableToolbar(props) {
                     d.priceStr.toLowerCase().includes(i.toLowerCase()) : false) ||
                 (d.sizeStr !== undefined && d.sizeStr !== null ?
                     d.sizeStr.toLowerCase().includes(i.toLowerCase()) : false) ||
-                //(d.type.name !== undefined ? d.type.name.toLowerCase().includes(i.toLowerCase()) : false) ||
                 (d.typeName !== undefined && d.typeName !== null ?
                     d.typeName.toLowerCase().includes(i.toLowerCase()) : false) ||
                 (d.versionNum !== undefined && d.versionNum !== null ?
@@ -186,33 +189,7 @@ function EnhancedTableToolbar(props) {
         handleGetData();
     }
 
-    //const handleDelete = (idList) => {
-    //    idList.forEach((id) => {
-    //        fetch(`/api/` + api + '/' + id, {
-    //            method: "delete",
-    //            headers: {
-    //                'Content-Type': 'application/json'
-    //            },
-    //        })
-    //            .then(response => {
-    //                if (!response.ok) {
-    //                    throw new Error("Response not ok!");
-    //                }
-    //                handleGetData();
-    //                //return response.json();
-    //            })
-    //            .catch((error) => {
-    //                //if (error.message === "Response not ok!") {
-
-    //                //}
-    //                console.log('error occured: ', error.message)
-    //            })
-    //    });
-    //    setSelected([]);
-    //}
-
-
-        const handleDelete = (idList) => {
+    const handleDelete = (idList) => {
         idList.forEach((id) => {
             fetch(`/api/` + api + '/' + id, {
                 method: "PATCH",
@@ -232,27 +209,6 @@ function EnhancedTableToolbar(props) {
         });
         setSelected([]);
     }
-
-
-
-    //const handleDelete = (idList) => {
-    //    idList.forEach(async (id) => {
-    //        const response = await fetch(`/api/` + api + '/' + id, {
-    //            method: 'patch',
-    //            headers: {
-    //                'Content-Type': 'application/json'
-    //            }
-    //        });
-    //        if (!response.ok) {
-    //            const message = `An error has occured: ${response.status}`;
-    //            console.log(message);
-    //            throw new Error(message);
-    //        }
-
-    //    });
-    //    handleGetData();
-    //    setSelected([]);
-    //}
 
     return (
         <Toolbar
@@ -286,7 +242,7 @@ function EnhancedTableToolbar(props) {
             )}
 
             {numSelected > 0 ? (
-                <Tooltip title="Delete">
+                <Tooltip title="Удалить">
                     <IconButton onClick={() => handleDelete(selected)}>
                         <DeleteIcon />
                     </IconButton>
@@ -302,7 +258,7 @@ function EnhancedTableToolbar(props) {
                         sx={{
                             mr: 1
                         }}>
-                        <Tooltip title="Add">
+                        <Tooltip title="Добавить">
                             <IconButton onClick={handleAdd}>
                                 <AddIcon />
                             </IconButton>
@@ -325,9 +281,6 @@ function EnhancedTableToolbar(props) {
                             <SearchOffIcon />
                         </IconButton>
                     </Paper>
-
-
-
                 </Box>
             )}
         </Toolbar>
@@ -340,7 +293,8 @@ EnhancedTableToolbar.propTypes = {
 
 export default function EnhancedTable(props) {
 
-    const { atrs, api, Modal, ModalEdit, registry, entityLink, isHideMoreDetails } =
+    const { atrs, api, Modal, ModalEdit, registry, entityLink,
+        isHideMoreDetails, isHideDelete } =
         props;
     const [data, setData] = React.useState([]);
 
@@ -464,19 +418,6 @@ export default function EnhancedTable(props) {
         setIsAdd(true);
     };
 
-
-    //const handleEdit = (id) => {
-    //    setRowId(id);
-    //    setIsOpen(true);
-    //    setIsAdd(false);
-    //};
-
-    //const handleAdd = () => {
-    //    setIsOpen(true);
-    //    setIsAdd(true);
-    //};
-
-
     return (
         <Box sx={{ width: '100%' }}>
             <Paper sx={{ width: '100%', mb: 2 }}>
@@ -517,7 +458,9 @@ export default function EnhancedTable(props) {
                             onSelectAllClick={handleSelectAllClick}
                             onRequestSort={handleRequestSort}
                             rowCount={data.length}
-                            headCells={props.headCells} />
+                            headCells={props.headCells}
+                            isHideDelete={isHideDelete}
+                        />
                         <TableBody>
                             {visibleRows.map((row, index) => {
                                 const isItemSelected = isSelected(row.id);
@@ -532,6 +475,7 @@ export default function EnhancedTable(props) {
                                         selected={isItemSelected}
                                         sx={{ cursor: 'pointer' }}>
                                         <TableCell
+                                            hidden={isHideDelete}
                                             padding="checkbox"
                                             sx={{ width: 20 }}>
                                             <Checkbox
@@ -571,16 +515,6 @@ export default function EnhancedTable(props) {
                                                 onClick={() => handleEdit(row)}>
                                                 <EditIcon />
                                             </IconButton>
-
-
-                                            {/*<IconButton*/}
-                                            {/*    aria-label="Edit"*/}
-                                            {/*    onClick={() => handleEdit(row.id)}>*/}
-                                            {/*    <EditIcon />*/}
-                                            {/*</IconButton>*/}
-
-
-
                                         </TableCell>
                                     </TableRow>
                                 );

@@ -67,6 +67,7 @@ namespace ProjectPlanner.Controllers
                           ProductTypeName = pt.Name,
                           ProductGroupName = pg.Name,
                           ProductIsPurchase = p.IsPurchase,
+                          ProductIsPurchaseStr= p.IsPurchase ? "Да" : "Нет",
                           QuantityNum = oc.QuantityNum,
                       };
 

@@ -40,8 +40,8 @@ export default function AddPlanProductCompose() {
         },
         {
             id: 'priceNum',
-            numeric: false,
-            disablePadding: true,
+            numeric: true,
+            disablePadding: false,
             label: 'Цена заказа без НДС',
         },
     ];
@@ -88,6 +88,7 @@ export default function AddPlanProductCompose() {
     const isProductAdd = false;
 
     const isHideQuantityInput = true;
+    const composeName = 'Добавить заказ в состав плана производства'
 
     return (
         <Box>
@@ -109,6 +110,7 @@ export default function AddPlanProductCompose() {
                 isOrderProductAdd={isOrderProductAdd}
                 isProductAdd={isProductAdd}
                 isHideQuantityInput={isHideQuantityInput}
+                composeName={composeName}
             >
             </ClippedDrawer>
         </Box>

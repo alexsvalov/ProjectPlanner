@@ -2,7 +2,6 @@
 import { useParams } from 'react-router-dom';
 import ClippedDrawer from "../navigation/ClippedDrawer";
 import EnhancedTableCompose from "../data/EnhancedTableCompose";
-import BasicTableProductCost from "../data/BasicTableProductCost";
 import Box from '@mui/material/Box';
 import PlanProductLabel from "./PlanProductLabel";
 import ContentPlanCompose from "../content/ContentPlanCompose";
@@ -61,12 +60,6 @@ export default function PlanProductCard() {
             disablePadding: false,
             label: 'Цена заказа без НДС',
         },
-        //{
-        //    id: 'empty',
-        //    numeric: true,
-        //    disablePadding: false,
-        //    label: '',
-        //},
     ];
 
     const atrs = [

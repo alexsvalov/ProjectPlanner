@@ -5,8 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 export default function ContentAdd(props) {
     const { EnhancedTable, headCells, atrs, api, productId, 
         entityLink, addEntityLink, apiAddCompose,
-        isAddCompose, isLinkCompose, isSaveCompose,
-
+        isAddCompose, isLinkCompose, isSaveCompose, composeName,
         isProductAdd, isOrderProductAdd, isPlanProductAdd, isHideQuantityInput
 
     } = props;
@@ -15,7 +14,6 @@ export default function ContentAdd(props) {
         <Box sx={{ flexGrow: 1 }}>
             <Toolbar component="main" sx={{ flexGrow: 1, p: 3 }} />
             <EnhancedTable
-
                 headCells={headCells}
                 atrs={atrs}
                 api={api}
@@ -26,11 +24,11 @@ export default function ContentAdd(props) {
                 isAddCompose={isAddCompose}
                 isLinkCompose={isLinkCompose}
                 isSaveCompose={isSaveCompose}
-
                 isPlanProductAdd={isPlanProductAdd}
                 isOrderProductAdd={isOrderProductAdd}
                 isProductAdd={isProductAdd}
                 isHideQuantityInput={isHideQuantityInput}
+                composeName={composeName}
             >
             </EnhancedTable>
         </Box>

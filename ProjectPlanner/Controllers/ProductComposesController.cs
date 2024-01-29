@@ -76,6 +76,7 @@ namespace ProjectPlanner.Controllers
                           ComponentTypeName = cpt.Name,
                           ComponentGroupName = cpg.Name,
                           ComponentIsPurchase = cp.IsPurchase,
+                          ComponentIsPurchaseStr = cp.IsPurchase ? "Да" : "Нет",
                           QuantityNum = pc.QuantityNum,
                       };
 
