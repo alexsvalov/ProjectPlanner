@@ -100,6 +100,10 @@ export default function FormDialogFixedCostRatioEdit(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 5,
+                                message: "Превышено максимальное количество символов - 5"
+                            },
                             min: {
                                 value: 1,
                                 message: "Коэффициент постоянных затрат должен быть не менее 1"

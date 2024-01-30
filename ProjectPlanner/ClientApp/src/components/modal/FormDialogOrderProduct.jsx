@@ -103,6 +103,10 @@ export default function FormDialogOrderProduct(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 10,
+                                message: "Превышено максимальное количество символов - 10"
+                            },
                             pattern: {
                                 value: /^\d+$/,
                                 message: "Допускается только целое число"
@@ -212,6 +216,10 @@ export default function FormDialogOrderProduct(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 20,
+                                message: "Превышено максимальное количество символов - 20"
+                            },
                             min: {
                                 value: 0,
                                 message: "Цена не может быть отрицательной"
@@ -241,6 +249,10 @@ export default function FormDialogOrderProduct(props) {
                             min: {
                                 value: 0,
                                 message: "Стоимость доставки не может быть отрицательной"
+                            },
+                            maxLength: {
+                                value: 10,
+                                message: "Превышено максимальное количество символов - 10"
                             },
                         }}
                         render={({ field: { onChange, value }, fieldState: { error } }) => (

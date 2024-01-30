@@ -75,6 +75,10 @@ export default function FormDialogCustomer(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 300,
+                                message: "Превышено максимальное количество символов - 300"
+                            },
                             validate: {
                                 checkEmpty: (value) => {
                                     return value.trim() !== '' || "Поле обязательно к заполнению";
@@ -103,6 +107,10 @@ export default function FormDialogCustomer(props) {
                         control={control}
                         rules={{                            
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 12,
+                                message: "Превышено максимальное количество символов - 12"
+                            },
                             pattern: {
                                 value: /^\d{10}$|^\d{12}$/,
                                 message: "ИНН должен состоят из 10 или 12 цифр"
@@ -146,6 +154,10 @@ export default function FormDialogCustomer(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 500,
+                                message: "Превышено максимальное количество символов - 500"
+                            },
                             validate: {
                                 checkEmpty: (value) => {
                                     return value.trim() !== '' || "Поле обязательно к заполнению";

@@ -143,6 +143,10 @@ export default function FormDialogMaterial(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 300,
+                                message: "Превышено максимальное количество символов - 300"
+                            },
                             validate: {
                                 checkEmpty: (value) => {
                                     return value.trim() !== '' || "Поле обязательно к заполнению";
@@ -171,6 +175,10 @@ export default function FormDialogMaterial(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 100,
+                                message: "Превышено максимальное количество символов - 100"
+                            },
                             validate: {
                                 checkEmpty: (value) => {
                                     return value.trim() !== '' || "Поле обязательно к заполнению";
@@ -199,6 +207,10 @@ export default function FormDialogMaterial(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 10,
+                                message: "Превышено максимальное количество символов - 10"
+                            },
                             pattern: {
                                 value: /^\d+$/,
                                 message: "Допускается только целое число"
@@ -326,6 +338,10 @@ export default function FormDialogMaterial(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 10,
+                                message: "Превышено максимальное количество символов - 10"
+                            },
                             min: {
                                 value: 0,
                                 message: "Цена не может быть отрицательной"

@@ -72,6 +72,10 @@ export default function FormDialogDict(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 100,
+                                message: "Превышено максимальное количество символов - 100"
+                            },
                             validate: {
                                 checkName: async (value) => {
                                     const response = await fetch(`/api/` + api, {

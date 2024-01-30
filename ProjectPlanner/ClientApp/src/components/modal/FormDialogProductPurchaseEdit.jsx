@@ -194,6 +194,10 @@ export default function FormDialogProductPurchaseEdit(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 100,
+                                message: "Превышено максимальное количество символов - 100"
+                            },
                             validate: {
                                 checkCodeStr: async (value) => {
                                     const response = await fetch(`/api/` + apiValidate + `/` + rowId.product.id, {
@@ -233,6 +237,10 @@ export default function FormDialogProductPurchaseEdit(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 300,
+                                message: "Превышено максимальное количество символов - 300"
+                            },
                             validate: {
                                 checkEmpty: (value) => {
                                     return value.trim() !== '' || "Поле обязательно к заполнению";
@@ -341,7 +349,6 @@ export default function FormDialogProductPurchaseEdit(props) {
                                 variant="standard"
                             />}
                     />
-
                     <Controller
                         control={control}
                         rules={{
@@ -349,6 +356,10 @@ export default function FormDialogProductPurchaseEdit(props) {
                             min: {
                                 value: 0,
                                 message: "Цена не может быть отрицательной"
+                            },
+                            maxLength: {
+                                value: 10,
+                                message: "Превышено максимальное количество символов - 10"
                             },
                         }}
                         render={({ field: { onChange, value }, fieldState: { error } }) => (

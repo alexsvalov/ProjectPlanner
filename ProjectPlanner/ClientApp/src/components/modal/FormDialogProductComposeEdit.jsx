@@ -258,6 +258,10 @@ export default function FormDialogProductComposeEdit(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 100,
+                                message: "Превышено максимальное количество символов - 100"
+                            },
                             validate: {
                                 checkCodeStr: async (value) => {
                                     const response = await fetch(`/api/` + apiValidate + `/` + rowId.id, {
@@ -297,6 +301,10 @@ export default function FormDialogProductComposeEdit(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 300,
+                                message: "Превышено максимальное количество символов - 300"
+                            },
                             validate: {
                                 checkEmpty: (value) => {
                                     return value.trim() !== '' || "Поле обязательно к заполнению";

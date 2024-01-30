@@ -76,6 +76,10 @@ export default function FormDialogPlanProduct(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 10,
+                                message: "Превышено максимальное количество символов - 10"
+                            },
                             pattern: {
                                 value: /^\d+$/,
                                 message: "Допускается только целое число"
@@ -128,9 +132,17 @@ export default function FormDialogPlanProduct(props) {
                     />
                     <Controller
                         control={control}
-                        render={({ field: { onChange, value } }) => (
+                        rules={{
+                            maxLength: {
+                                value: 300,
+                                message: "Превышено максимальное количество символов - 300"
+                            },
+                        }}                        
+                        render={({ field: { onChange, value }, fieldState: { error } }) => (
                             <TextField
                                 focused
+                                error={!!error}
+                                helperText={error?.message}
                                 margin="dense"
                                 id="descriptionAddText"
                                 label="Описание"

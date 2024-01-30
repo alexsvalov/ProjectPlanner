@@ -155,6 +155,10 @@ export default function FormDialogProductDetail(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 100,
+                                message: "Превышено максимальное количество символов - 100"
+                            },
                             validate: {
                                 checkCodeStr: async (value) => {
                                     const response = await fetch(`/api/` + api, {
@@ -195,6 +199,10 @@ export default function FormDialogProductDetail(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 300,
+                                message: "Превышено максимальное количество символов - 300"
+                            },
                             validate: {
                                 checkEmpty: (value) => {
                                     return value.trim() !== '' || "Поле обязательно к заполнению";
@@ -319,6 +327,10 @@ export default function FormDialogProductDetail(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 10,
+                                message: "Превышено максимальное количество символов - 10"
+                            },
                             pattern: {
                                 value: /^\d+$/,
                                 message: "Допускается только целое число"
@@ -357,6 +369,10 @@ export default function FormDialogProductDetail(props) {
                                 value: 1,
                                 message: "Ширина должна быть не менее 1"
                             },
+                            maxLength: {
+                                value: 10,
+                                message: "Превышено максимальное количество символов - 10"
+                            },
                         }}
                         render={({ field: { onChange, value }, fieldState: { error } }) => (
                             <TextField
@@ -379,6 +395,10 @@ export default function FormDialogProductDetail(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 10,
+                                message: "Превышено максимальное количество символов - 10"
+                            },
                             min: {
                                 value: 0.01,
                                 message: "Масса заготовки должна быть не менее 0.01 кг"
@@ -406,6 +426,10 @@ export default function FormDialogProductDetail(props) {
                         control={control}
                         rules={{
                             required: "Поле обязательно к заполнению",
+                            maxLength: {
+                                value: 10,
+                                message: "Превышено максимальное количество символов - 10"
+                            },
                             min: {
                                 value: 1,
                                 message: "Коэффициент трудоемкости должен быть не менее 1"
