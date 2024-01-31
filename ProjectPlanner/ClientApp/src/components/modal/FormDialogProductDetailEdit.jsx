@@ -244,7 +244,7 @@ export default function FormDialogProductDetailEdit(props) {
                             },
                             validate: {
                                 checkCodeStr: async (value) => {
-                                    const response = await fetch(`/api/` + apiValidate + `/` + rowId.product.id, {
+                                    const response = await fetch(`/api/` + apiValidate + `/` + productId, {
                                         method: "get",
                                         headers: {
                                             'Content-Type': 'application/json'
