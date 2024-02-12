@@ -19,7 +19,8 @@ namespace ProjectPlanner.Controllers
 
 
         //GET: api/PlanProducts/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}")]            
+
         public ActionResult<IEnumerable<ReportPlanBlankDTO>> GetPlanBlanks(long id)
         {
             var planProduct = new PlanProductReport(_context);

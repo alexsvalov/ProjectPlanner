@@ -334,29 +334,29 @@ export default function EnhancedTableReport(props) {
         props;
     const [data, setData] = React.useState([]);
 
-    //const handleGetData = async () => {
-    //    const response = await fetch(`/api/` + api + `/${productId}`);
-    //    const result = await response.json();
-    //    console.log(result);
-    //    setData(result);
-    //}
-
-    const handleGetData = () => {
-        fetch(`/api/` + api + `/${productId}`, {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-            .then(response => { return response.json() })
-            .then(responseJson => {
-                setData(responseJson);
-                console.log(responseJson)
-            })
-            .catch((error) => {
-                console.log(error)
-            });
+    const handleGetData = async () => {
+        const response = await fetch(`/api/` + api + `/${productId}`);
+        const result = await response.json();
+        console.log(result);
+        setData(result);
     }
+
+    //const handleGetData = () => {
+    //    fetch(`/api/` + api + `/${productId}`, {
+    //        method: "GET",
+    //        headers: {
+    //            'Content-Type': 'application/json'
+    //        },
+    //    })
+    //        .then(response => { return response.json() })
+    //        .then(responseJson => {
+    //            setData(responseJson);
+    //            console.log(responseJson)
+    //        })
+    //        .catch((error) => {
+    //            console.log(error)
+    //        });
+    //}
 
     React.useEffect(() => {
         handleGetData();
@@ -479,7 +479,6 @@ export default function EnhancedTableReport(props) {
                             {visibleRows.map((row, index) => {
                                 const isItemSelected = isSelected(row.id);
                                 const labelId = `enhanced-table-checkbox-${index}`;
-
                                 return (
                                     <TableRow
                                         hover
