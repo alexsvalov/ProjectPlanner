@@ -41,10 +41,13 @@ namespace ProjectPlanner.Controllers
                              RatioNum = fc.RatioNum.ToString("N2", new CultureInfo("ru-RU")),
                              StartDate = fc.StartDate,
                              FinishDate = fc.FinishDate,
-                             StartDateStr = fc.StartDate.ToLocalTime().ToString("G"),
-                             FinishDateStr = 
-                                fc.FinishDate.Date.ToString("d") != "30.12.4000" ? 
-                                fc.FinishDate.ToLocalTime().ToString("G") : null,
+                             StartDateStr = fc.StartDate.ToLocalTime().ToString("dd.MM.yyyy hh:mm:ss"),
+                             //StartDateStr = fc.StartDate.ToLocalTime().ToString("G"),
+                             //FinishDateStr = 
+                             //   fc.FinishDate.Date.ToString("d") != "30.12.4000" ? 
+                             //   fc.FinishDate.ToLocalTime().ToString("G") : null,
+                             FinishDateStr =
+                                fc.FinishDate.Year != 4000 ? fc.FinishDate.ToLocalTime().ToString("dd.MM.yyyy hh:mm:ss") : null,
                          };
 
             if (ratios == null)

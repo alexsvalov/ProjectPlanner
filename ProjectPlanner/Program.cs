@@ -24,6 +24,9 @@ builder.Services.AddControllersWithViews()
 builder.Services.AddControllers(options => 
     options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
 
+//builder.WebHost.UseIIS();
+//builder.WebHost.UseIISIntegration();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,7 +36,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
